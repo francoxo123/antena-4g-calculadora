@@ -3,166 +3,237 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Calculadora de Antena Repetidora 4G — Volumen, Masa y Área</title>
+<title>Calculadora Repetidora 4G - Proyecto INACAP</title>
 
+<!-- ==================== ESTILO TIPO INACAP ==================== -->
 <style>
-  :root { --bg:#eef2f7; --card:#ffffff; --accent:#2563eb; --text:#111; --muted:#666; }
-  body{ font-family:Arial,Helvetica,sans-serif;background:var(--bg);margin:0;padding:25px;color:var(--text);}
-  .container{ max-width:1100px;margin:auto;}
-  .card{background:var(--card);padding:20px;margin-bottom:18px;border-radius:10px;box-shadow:0 5px 14px rgba(0,0,0,.07);}
-  h1,h2{margin:0 0 10px;}
-  label{font-weight:bold;margin-top:10px;display:block}
-  input,select{width:100%;padding:8px;margin-top:5px;border-radius:6px;border:1px solid #ccc;}
-  .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:0;margin-top:10px;cursor:pointer;}
-  .btn:hover{filter:brightness(.9);}
-  .section-title{font-size:22px;font-weight:700;margin-bottom:6px;}
-  .results{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;}
-  .result{flex:1;min-width:200px;background:#f7f9ff;padding:12px;border-radius:8px;text-align:center;}
-  .note{font-size:14px;color:var(--muted)}
-  pre{background:#fff;padding:10px;border-radius:8px;border:1px solid #ddd;overflow:auto;font-size:13px}
-  @media(max-width:800px){.results{flex-direction:column}}
+:root{
+  --rojo:#c8102e;   /* color institucional Inacap */
+  --gris:#2b2b2b;
+  --blanco:#ffffff;
+  --fondo:#f3f3f3;
+  --card:#ffffff;
+  --acento:#c8102e;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--fondo);
+  color:#111;
+}
+
+header{
+  background:var(--rojo);
+  padding:18px;
+  color:white;
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:25px;
+}
+
+.card{
+  background:var(--card);
+  padding:22px;
+  margin-bottom:22px;
+  border-radius:10px;
+  box-shadow:0 5px 14px rgba(0,0,0,.08);
+}
+
+h1,h2{margin:0 0 10px;font-weight:800;}
+label{display:block;margin-top:12px;font-weight:bold;}
+input,select{
+  width:100%;
+  padding:8px;
+  margin-top:5px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:15px;
+}
+.btn{
+  background:var(--rojo);
+  color:white;
+  padding:10px 14px;
+  border-radius:8px;
+  border:0;
+  margin-top:14px;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn:hover{filter:brightness(.9);}
+
+.results{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;}
+.result{
+  flex:1;
+  min-width:210px;
+  background:#ffecec;
+  border-left:6px solid var(--rojo);
+  padding:12px;
+  font-weight:700;
+  border-radius:6px;
+  text-align:center;
+}
+
+#recomendacion{
+  margin-top:18px;
+  background:#ffecec;
+  padding:14px;
+  border-radius:10px;
+  border-left:6px solid var(--rojo);
+  font-size:18px;
+  font-weight:800;
+}
+
+pre{
+  background:#f7f7f7;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-size:14px;
+  overflow:auto;
+  white-space:pre-wrap;
+}
 </style>
 </head>
+
 <body>
+
+<!-- ==================== HEADER INACAP ==================== -->
+<header>PROYECTO ANTENA REPETIDORA 4G · INACAP</header>
 
 <div class="container">
 
-<!-- =========================  TÍTULO  ============================== -->
+<!-- ==================== MODO SIMPLE ==================== -->
 <div class="card">
-  <h1>📡 Calculadora de Antena Repetidora 4G</h1>
-  <p class="note">Permite estimar volumen, masa y área superficial de antenas repetidoras para zonas rurales. Incluye un modo simple para personas sin conocimientos técnicos.</p>
-</div>
+  <h2>🥇 Modo fácil — Recomendación de Antena</h2>
+  <p>Use este modo si solo quiere saber qué antena comprar y el tamaño recomendado, sin conocimientos matemáticos.</p>
 
-<!-- =========================  MODO SIMPLE ============================== -->
-<div class="card">
-  <h2>🥇 Modo fácil (para zonas rurales)</h2>
-  <p>Este modo no requiere saber matemáticas. Solo ingrese datos básicos y la herramienta recomendará el tamaño aproximado de la antena.</p>
+  <label>Distancia a la torre de señal (km)</label>
+  <input id="distancia" type="number" value="3">
 
-  <label>Distancia a la antena principal (km)</label>
-  <input id="distancia" type="number" step="0.1" value="3">
+  <label>Radio de señal que desea cubrir (m)</label>
+  <input id="radioCobertura" type="number" value="200">
 
-  <label>Radio que desea cubrir (m)</label>
-  <input id="radioCobertura" type="number" step="10" value="200">
-
-  <label>Material</label>
+  <label>Material estimado</label>
   <select id="materialSimple">
     <option value="2700">Aluminio (recomendado)</option>
-    <option value="1200">Fibra</option>
-    <option value="1400">PVC</option>
+    <option value="1400">Fibra / PVC</option>
   </select>
 
-  <button class="btn" id="calcSimple">Calcular recomendación</button>
+  <button class="btn" id="calcSimple">Calcular tamaño</button>
+  <button class="btn" id="recomendarBtn" style="background:#008d2f">Recomendar qué antena comprar</button>
 
-  <div id="resultadoSimple" style="margin-top:15px;font-size:17px;font-weight:600">
-    ← Presione calcular
+  <div id="resultadoSimple" style="margin-top:18px;font-size:17px;font-weight:600;">
+    ← Ingrese datos y presione un botón
   </div>
+  <div id="recomendacion"></div>
 </div>
 
-<!-- ========================= MODO TÉCNICO (CON CÁLCULOS INTEGRALES) ============================== -->
+<!-- ==================== MODO TÉCNICO ==================== -->
 <div class="card">
-  <h2>⚙ Modo avanzado — Cálculo por Integral (para ingeniería)</h2>
-  <p class="note">Este modo usa integración numérica (Simpson) para obtener volumen real del reflector.</p>
+  <h2>⚙ Cálculo Integral Avanzado</h2>
+  <p>Este modo usa integrales (volumen + área) para ingenieros, técnicos o estudiantes de telecomunicaciones.</p>
 
-  <label>Perfil de la antena</label>
+  <label>Perfil matemático</label>
   <select id="profile">
     <option value="sqrt">f(x) = √(2x+1)</option>
     <option value="parabola">f(x) = ax² + b</option>
     <option value="linear">f(x) = m x + c</option>
   </select>
 
-  <label>Intervalo x (a → b)</label>
+  <label>Intervalo x (a→b)</label>
   <input id="a" type="number" value="0">
   <input id="b" type="number" value="4">
 
-  <label>Eje de rotación (y = d)</label>
+  <label>Eje de giro (y = d)</label>
   <input id="d" type="number" value="1">
 
-  <label>Escala (1 unidad = metros reales)</label>
-  <input id="scale" type="number" step="0.01" value="0.1">
+  <label>Escala modelo → metros reales</label>
+  <input id="scale" type="number" step="0.1" value="0.1">
 
-  <label>Densidad del material (kg/m³)</label>
+  <label>Densidad material (kg/m³)</label>
   <select id="material">
     <option value="2700">Aluminio</option>
     <option value="1200">Fibra</option>
     <option value="7800">Acero</option>
   </select>
 
-  <label>Rendimiento de pintura (m²/L)</label>
+  <label>Rendimiento pintura m²/L</label>
   <input id="paintYield" type="number" value="10">
 
-  <button class="btn" id="computeBtn">Calcular volumen/masa</button>
-</div>
-
-<!-- ========================= RESULTADOS ============================== -->
-<div class="card">
-  <h2>📊 Resultados avanzados</h2>
+  <button class="btn" id="computeBtn">Calcular Integral</button>
 
   <div class="results">
     <div class="result"><b>Volumen modelo</b><br><span id="vol_model">--</span> u³</div>
     <div class="result"><b>Volumen real</b><br><span id="vol_m3">--</span> m³</div>
     <div class="result"><b>Área modelo</b><br><span id="area_model">--</span> u²</div>
     <div class="result"><b>Área real</b><br><span id="area_m2">--</span> m²</div>
-    <div class="result"><b>Masa estimada</b><br><span id="mass">--</span></div>
-    <div class="result"><b>Pintura necesaria</b><br><span id="paintLiters">--</span> L</div>
+    <div class="result"><b>Masa aprox</b><br><span id="mass">--</span></div>
+    <div class="result"><b>Pintura</b><br><span id="paintLiters">--</span>L</div>
   </div>
 
-  <pre id="details">Presione CALCULAR para generar resultados.</pre>
+  <pre id="details">Presione "Calcular Integral"</pre>
 </div>
 
-<!-- ========================= SCRIPT JAVASCRIPT ============================== -->
+</div>
+
+<!-- ==================== JAVASCRIPT FUNCIONAL ==================== -->
 <script>
-function simpson(f,a,b,n=2000){let h=(b-a)/n,s=f(a)+f(b);for(let i=1;i<n;i++){s+= ((i%2)?4:2)*f(a+i*h);}return s*h/3;}
+function simpson(f,a,b,n=2000){
+  let h=(b-a)/n,s=f(a)+f(b);
+  for(let i=1;i<n;i++) s+= ((i%2)?4:2)*f(a+i*h);
+  return s*h/3;
+}
 
 function getProfileFuncs(){
-  let pa=parseFloat(document.getElementById('pa')?.value||0.5),
-      pb=parseFloat(document.getElementById('pb')?.value||1),
-      m=parseFloat(document.getElementById('m')?.value||0.5),
-      c=parseFloat(document.getElementById('c')?.value||1),
-      sel=document.getElementById('profile').value;
-
+  let sel=document.getElementById("profile").value;
   if(sel=="sqrt") return{f:x=>Math.sqrt(2*x+1),fp:x=>1/Math.sqrt(2*x+1)};
-  if(sel=="parabola")return{f:x=>pa*x*x+pb,fp:x=>2*pa*x};
-  return{f:x=>m*x+c,fp:x=>m};
+  if(sel=="parabola")return{f:x=>0.5*x*x+1,fp:x=>x};
+  return{f:x=>0.6*x+1,fp:x=>0.6};
 }
 
-document.getElementById('computeBtn').onclick=()=>{
-  let a=parseFloat(document.getElementById('a').value),
-      b=parseFloat(document.getElementById('b').value),
-      d=parseFloat(document.getElementById('d').value),
-      scale=parseFloat(document.getElementById('scale').value),
-      rho=parseFloat(document.getElementById('material').value),
-      yieldP=parseFloat(document.getElementById('paintYield').value),
-      {f,fp}=getProfileFuncs();
-
-  let vol = Math.PI*simpson(x=>Math.max(f(x)-d,0)**2,a,b);
-  let area=2*Math.PI*simpson(x=>Math.max(f(x)-d,0)*Math.sqrt(1+fp(x)**2),a,b);
-
-  let volM3=vol*scale**3, areaM2=area*scale**2, mass=volM3*rho, paint=areaM2/yieldP;
-
-  document.getElementById('vol_model').textContent=vol.toFixed(4);
-  document.getElementById('vol_m3').textContent=volM3.toFixed(4);
-  document.getElementById('area_model').textContent=area.toFixed(4);
-  document.getElementById('area_m2').textContent=areaM2.toFixed(4);
-  document.getElementById('mass').textContent=mass.toFixed(2)+" kg";
-  document.getElementById('paintLiters').textContent=paint.toFixed(3)+" L";
-
-  document.getElementById('details').textContent=
-`Volumen modelo = π∫(f(x)-d)²dx = ${vol}
-Volumen real = ${volM3} m³
-Área modelo = 2π∫(f(x)-d)*√(1+(f'(x))²)dx = ${area}
-Masa estimada = ${mass} kg
-Pintura necesaria = ${paint} L`;
-}
-
-document.getElementById("calcSimple").onclick=()=>{
+// Modo SIMPLE tamaño antena
+calcSimple.onclick=()=>{
   let dist=parseFloat(distancia.value),rad=parseFloat(radioCobertura.value),dens=parseFloat(materialSimple.value);
-  let largo=4+dist*0.4,diam=Math.min(1+rad/150,8),peso=(largo*diam*0.9)*(dens/2700);
-  resultadoSimple.innerHTML=`
-  📡 Tamaño recomendado <br>
-  Largo: ${largo.toFixed(1)} unidades<br>
-  Diámetro: ${diam.toFixed(1)} unidades<br>
-  ⚖ Peso aprox: ${peso.toFixed(1)} kg`;
+  let largo=4+dist*0.4, diam=Math.min(1+rad/150,8), peso=(largo*diam*0.9)*(dens/2700);
+  resultadoSimple.innerHTML=`📡 Tamaño recomendado:<br>
+  Largo: <b>${largo.toFixed(1)}</b> u<br>Diámetro: <b>${diam.toFixed(1)}</b> u<br>Peso: <b>${peso.toFixed(2)}</b>kg`;
 }
+
+// 🔥 RECOMENDACIÓN DE ANTENA
+recomendarBtn.onclick=()=>{
+  let dist=parseFloat(distancia.value);
+  let r = dist<=2 ? "Omnidireccional" :
+          dist<=6 ? "Panel 4G" :
+          dist<=12? "Yagi Direccional" : "Parabólica Alta Ganancia";
+  recomendacion.innerHTML=`📡 ANTENA RECOMENDADA: <b>${r}</b>`;
+}
+
+// MODO INTEGRAL
+computeBtn.onclick=()=>{
+  let a=parseFloat(a.value),b=parseFloat(b.value),d=parseFloat(d.value),scale=parseFloat(scale.value),
+  rho=parseFloat(material.value),yieldP=parseFloat(paintYield.value),{f,fp}=getProfileFuncs();
+
+  let vol=Math.PI*simpson(x=>Math.max(f(x)-d,0)**2,a,b);
+  let area=2*Math.PI*simpson(x=>Math.max(f(x)-d,0)*Math.sqrt(1+fp(x)**2),a,b);
+  let volM3=vol*scale**3,areaM2=area*scale**2,mass=volM3*rho,paint=areaM2/yieldP;
+
+  vol_model.textContent=vol.toFixed(4);
+  vol_m3.textContent=volM3.toFixed(4);
+  area_model.textContent=area.toFixed(4);
+  area_m2.textContent=areaM2.toFixed(4);
+  mass.textContent=mass.toFixed(2)+" kg";
+  paintLiters.textContent=paint.toFixed(2)+" L";
+  details.textContent=`Volumen: ${vol}\nÁrea: ${area}\nMasa: ${mass}kg\nPintura: ${paint}L`;
+};
 </script>
 </body>
 </html>
